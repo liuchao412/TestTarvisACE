@@ -17,6 +17,8 @@ env:
     - COMPILER=g++-7
     
 before_install:
+  - mkdir -p $ACEDIR
+  - cd $ACEDIR
   - git clone --depth 1 https://github.com/psigen/ace.git
   
 before_script:
