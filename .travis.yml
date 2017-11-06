@@ -7,21 +7,36 @@ compiler:
   - gcc
 
 env:
+  matrix:
+    - ACE=1
   global:
-    - ACE_ROOT=$TRAVIS_BUILD_DIR/ACE
-    - MPC_ROOT=$TRAVIS_BUILD_DIR/MPC
+    - CURPATH=$(pwd)
+    - ACEDIR=$HOME/Tools
+    - ACE_ROOT=$ACEDIR/ACE_wrappers
+    - LD_LIBRARY_PATH=$ACE_ROOT/lib:$LD_LIBRARY_PATH
+    - COMPILER=g++-7
     
 before_install:
   - git clone --depth 1 https://github.com/psigen/ace.git
   
 before_script:
   - export
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then echo -e "#include \"ace/config-linux.h\"" >> $ACE_ROOT/ace/config.h; fi
-  - echo -e "workspace {\n" >> $TRAVIS_BUILD_DIR/travis.mwc
-  - if [ "$ACE" == "1" ]; then echo -e "\$(ACE_ROOT)/ace/ace.mwc\n" >> $TRAVIS_BUILD_DIR/travis.mwc; fi 
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then 
+      echo -e "#include \"ace/config-linux.h\"" >> $ACE_ROOT/ace/config.h; 
+      echo -e "#define ACE_HAS_EVENT_POLL" >> $ACE_ROOT/ace/config.h; 
+    fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       if [ "$CXX" == "g++" ]; then
-        echo -e "include \$(ACE_ROOT)/include/makeinclude/platform_linux.GNU" >> $ACE_ROOT/include/makeinclude/platform_macros.GNU;  
+        echo -e "include \$(ACE_ROOT)/include/makeinclude/platform_linux.GNU" >> $ACE_ROOT/include/makeinclude/platform_macros.GNU;
+      else
+        echo -e "include \$(ACE_ROOT)/include/makeinclude/platform_linux_clang.GNU" >> $ACE_ROOT/include/makeinclude/platform_macros.GNU;
+      fi
+    fi
+
+  - cd $ACE_ROOT
+  - $ACE_ROOT/bin/mwc.pl -type gnuace ACE.mwc
+  - make ACE
+  - ls $ACE_ROOT/lib/
   
 script:
   - perl $ACE_ROOT/bin/mwc.pl -type gnuace
