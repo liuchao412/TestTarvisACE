@@ -23,9 +23,6 @@ before_script:
       if [ "$CXX" == "g++" ]; then
         echo -e "include \$(ACE_ROOT)/include/makeinclude/platform_linux.GNU" >> $ACE_ROOT/include/makeinclude/platform_macros.GNU;  
   
-notifications:
-  recipients:
-    - freeeyes@163.com
-  email:
-    on_success: change
-    on_failure: always
+script:
+  - perl $ACE_ROOT/bin/mwc.pl -type gnuace
+  - make -j 6
