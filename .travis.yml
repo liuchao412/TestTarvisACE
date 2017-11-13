@@ -49,7 +49,7 @@ script:
   - make -j 6
   
 addons:
-  coverity_scan:
+  master:
     project:
       name: "freeeyes/TestTarvisACE"
       description: "Build submitted via Travis CI"
