@@ -23,7 +23,6 @@ before_install:
   - cd $ACEDIR
   - wget http://download.dre.vanderbilt.edu/previous_versions/ACE-6.4.0.tar.gz
   - tar zxf ACE-6.4.0.tar.gz
-  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca- 
   
 before_script:
   - export
@@ -58,4 +57,5 @@ script:
   - cd $TRAVIS_BUILD_DIR
   - $ACE_ROOT/bin/mwc.pl -type gnuace
   - make -j 6
+  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca- 
   
