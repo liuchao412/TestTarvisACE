@@ -43,17 +43,19 @@ before_script:
   - $ACE_ROOT/bin/mwc.pl -type gnuace ACE.mwc
   - make ACE > /dev/null 2>&1
   - ls $ACE_ROOT/lib/
+  
+addons:
+  coverity_scan:
+    project:
+      name: "freeeyes/TestTarvisACE"
+      description: "Build submitted via Travis CI"
+      notification_email: freeeyes@163.com
+    build_command_prepend: "cd $ACE_ROOT;$ACE_ROOT/bin/mwc.pl -type gnuace ACE.mwc"
+    build_command:   "make -j 4"
+    branch_pattern: master    
+  
 script:
   - cd $TRAVIS_BUILD_DIR
   - $ACE_ROOT/bin/mwc.pl -type gnuace
   - make -j 6
   
-addons:
-  master:
-    project:
-      name: "freeeyes/TestTarvisACE"
-      description: "Build submitted via Travis CI"
-    notification_email: freeeyes@163.com
-    build_command_prepend: "./configure; make clean"
-    build_command:   "make -j 4"
-    branch_pattern: master  
