@@ -15,12 +15,15 @@ env:
     - ACE_ROOT=$ACEDIR/ACE_wrappers
     - LD_LIBRARY_PATH=$ACE_ROOT/lib:$LD_LIBRARY_PATH
     - COMPILER=g++-7
+    - secure: "J6MiAeAnzCN1+1Hy7XZfWFJZT0raf/RlMwsTQskpHdqEkAw+IMR1UACiLC67Cs0BCleFKYAuOk8Xy68mDfnoGDiuMoe2hWkWyu8TTWlJe5vh4qS3eyySEJ+LlmQu0bwJHYh+yCwBoti6cUApc/kK2icBE96YDfBREGyvoj707AbhJ03daq/PAyD0bNhKH05YHtIIqRP0t0tPsP5TYg06G01Q7SliPaABuUXRThbuvuOanSH0LrwbhUrPedO9zNL102jCZ5Jcp55ahWnNAjiJvx9aTKkPUC8vwoEEMNKWG28w/++MKUBW9qqYke0T717ViXpKa/kti4jdzUR9klg6H8YKgYq5yqw0fNd4wj2cdWnQTqyTJmoFXoql9pb9UTG2AX/MfB+T/gJ4+H1WrNSGkJwl3/jmrLV3tmTFWVwDx2YwtsA81jY1a8JBTnyYAe4iTJGAqVDH9mMP55zHTH6c4RjdBv7yil0fibPoRkWe1yhXa5tTpfLfzwCAXZSoWjJQppZ+G+VmBeffETx/iSTDBHAJBtL7XEmLYm0QtMN/7DRsuNvIXEkhsZZvOJpYG7xIejHgEmCkQd+hW9VvOOUUPYjc5GgwFHfFn3nj8hChqKsq+Iv6u68EByQu58v792hOPoRNbpPqriJj/LQlnHo/jKJ9qU0pGQf1aeQuIIS13OA="
+
 
 before_install:
   - mkdir -p $ACEDIR
   - cd $ACEDIR
   - wget http://download.dre.vanderbilt.edu/previous_versions/ACE-6.4.0.tar.gz
   - tar zxf ACE-6.4.0.tar.gz
+  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
 before_script:
   - export
@@ -44,3 +47,13 @@ script:
   - cd $TRAVIS_BUILD_DIR
   - $ACE_ROOT/bin/mwc.pl -type gnuace
   - make -j 6
+  
+addons:
+  coverity_scan:
+    project:
+      name: "freeeyes/TestTarvisACE"
+      description: "Build submitted via Travis CI"
+    notification_email: freeeyes@163.com
+    build_command_prepend: "./configure; make clean"
+    build_command:   "make -j 4"
+    branch_pattern: master  
