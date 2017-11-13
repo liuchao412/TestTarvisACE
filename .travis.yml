@@ -23,17 +23,7 @@ before_install:
   - cd $ACEDIR
   - wget http://download.dre.vanderbilt.edu/previous_versions/ACE-6.4.0.tar.gz
   - tar zxf ACE-6.4.0.tar.gz
-  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
-
-addons:
-  coverity_scan:
-    project:
-      name: "freeeyes/TestTarvisACE"
-      description: "Build submitted via Travis CI"
-      notification_email: freeeyes@163.com
-    build_command_prepend: "cd $ACE_ROOT;$ACE_ROOT/bin/mwc.pl -type gnuace"
-    build_command:   "make -j 4"
-    branch_pattern: master    
+  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca- 
   
 before_script:
   - export
@@ -53,6 +43,16 @@ before_script:
   - $ACE_ROOT/bin/mwc.pl -type gnuace ACE.mwc
   - make ACE > /dev/null 2>&1
   - ls $ACE_ROOT/lib/  
+  
+addons:
+  coverity_scan:
+    project:
+      name: "freeeyes/TestTarvisACE"
+      description: "Build submitted via Travis CI"
+      notification_email: freeeyes@163.com
+    build_command_prepend: "cd $ACE_ROOT;$ACE_ROOT/bin/mwc.pl -type gnuace"
+    build_command:   "make -j 4"
+    branch_pattern: master     
   
 script:
   - cd $TRAVIS_BUILD_DIR
