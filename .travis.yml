@@ -15,7 +15,7 @@ env:
     - ACE_ROOT=$ACEDIR/ACE_wrappers
     - LD_LIBRARY_PATH=$ACE_ROOT/lib:$LD_LIBRARY_PATH
     - COMPILER=g++-7
-    - secure: "J6MiAeAnzCN1+1Hy7XZfWFJZT0raf/RlMwsTQskpHdqEkAw+IMR1UACiLC67Cs0BCleFKYAuOk8Xy68mDfnoGDiuMoe2hWkWyu8TTWlJe5vh4qS3eyySEJ+LlmQu0bwJHYh+yCwBoti6cUApc/kK2icBE96YDfBREGyvoj707AbhJ03daq/PAyD0bNhKH05YHtIIqRP0t0tPsP5TYg06G01Q7SliPaABuUXRThbuvuOanSH0LrwbhUrPedO9zNL102jCZ5Jcp55ahWnNAjiJvx9aTKkPUC8vwoEEMNKWG28w/++MKUBW9qqYke0T717ViXpKa/kti4jdzUR9klg6H8YKgYq5yqw0fNd4wj2cdWnQTqyTJmoFXoql9pb9UTG2AX/MfB+T/gJ4+H1WrNSGkJwl3/jmrLV3tmTFWVwDx2YwtsA81jY1a8JBTnyYAe4iTJGAqVDH9mMP55zHTH6c4RjdBv7yil0fibPoRkWe1yhXa5tTpfLfzwCAXZSoWjJQppZ+G+VmBeffETx/iSTDBHAJBtL7XEmLYm0QtMN/7DRsuNvIXEkhsZZvOJpYG7xIejHgEmCkQd+hW9VvOOUUPYjc5GgwFHfFn3nj8hChqKsq+Iv6u68EByQu58v792hOPoRNbpPqriJj/LQlnHo/jKJ9qU0pGQf1aeQuIIS13OA="
+    - secure: "j47phgTWUecTjPrCzoGsCPiHzvw0QJY2iE/yQ2IL0H2kHE1F984xkCcOaECBlfIFAB1E4f7m1GU1jU0cbpKMAYFAw3M64XnR13wh6Xmc3I6yq0FiUJjZD0XHw+tvYVpZ8uqyLbHwxj2dVF1I0cWtOuqVMnWBEUjOnIt48Swg+RBMA+1Iib7MYy0/zGh/l/b6thza+lu2SGAcwf5zvJECLDigaqctzdyelPQ0IiO1NJuEWnjODJtzbdoOXn720gvbQsCFJQVjWDOUwNCjy01DQLAYKvU2kJDz76RTHGg4wAwNiBsRP1pNx8Mur8NoUx8ZL/sTAU/FvYsSXX04QOMtSDvuwdu/2tr1aZD3X2AURp9ZrNQz5R4aMo67HoTBuxTPU8jAHmF1Skf/vYU0Zk1feqkxKLrREEGBwTy/njnZRr66qXOdOg8IrsJQwfSu7P/X29Qs2CmG5huD5dWzxDMrzmu9H4tiPTRVZ5i9C7UUzc7ey8/kTrN7n6BKJSLCBz3eIUpjHKjtJDhbcz2HWlx1QwI3zmRzDfsd7HQFpp/ZUjvjzHfubEnkBhw2DFRK3xD37ZLCAaddVV+TTWkZyGYZa2QSs0ATh5bgsaSOhDtnq5VhIzSGDPx9V4gmI8hxRfSsAYAoBO0SJtpjDlp6VBaikKV2amVRQjuLQvd8D/PVB/8="
 
 
 before_install:
@@ -50,7 +50,7 @@ addons:
       name: "freeeyes/TestTarvisACE"
       description: "Build submitted via Travis CI"
       notification_email: freeeyes@163.com
-    build_command_prepend: "cd $ACE_ROOT;$ACE_ROOT/bin/mwc.pl -type gnuace ACE.mwc"
+    build_command_prepend: "cd $ACE_ROOT;$ACE_ROOT/bin/mwc.pl -type gnuace"
     build_command:   "make -j 4"
     branch_pattern: master    
   
