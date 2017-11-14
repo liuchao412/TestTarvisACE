@@ -41,7 +41,7 @@ before_script:
   - $ACE_ROOT/bin/mwc.pl -type gnuace ACE.mwc
   - make ACE > /dev/null 2>&1
   - ls $ACE_ROOT/lib/ 
-  - cd $TRAVIS_BUILD_DIR 
+
 addons:
   coverity_scan:
     project:
