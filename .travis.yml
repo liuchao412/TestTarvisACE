@@ -23,6 +23,7 @@ before_install:
   - cd $ACEDIR
   - wget http://download.dre.vanderbilt.edu/previous_versions/ACE-6.4.0.tar.gz
   - tar zxf ACE-6.4.0.tar.gz
+  - cd $TRAVIS_BUILD_DIR
   
 before_script:
   - export
