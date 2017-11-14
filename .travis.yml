@@ -15,7 +15,7 @@ env:
     - ACE_ROOT=$ACEDIR/ACE_wrappers
     - LD_LIBRARY_PATH=$ACE_ROOT/lib:$LD_LIBRARY_PATH
     - COMPILER=g++-7
-    - secure: "j47phgTWUecTjPrCzoGsCPiHzvw0QJY2iE/yQ2IL0H2kHE1F984xkCcOaECBlfIFAB1E4f7m1GU1jU0cbpKMAYFAw3M64XnR13wh6Xmc3I6yq0FiUJjZD0XHw+tvYVpZ8uqyLbHwxj2dVF1I0cWtOuqVMnWBEUjOnIt48Swg+RBMA+1Iib7MYy0/zGh/l/b6thza+lu2SGAcwf5zvJECLDigaqctzdyelPQ0IiO1NJuEWnjODJtzbdoOXn720gvbQsCFJQVjWDOUwNCjy01DQLAYKvU2kJDz76RTHGg4wAwNiBsRP1pNx8Mur8NoUx8ZL/sTAU/FvYsSXX04QOMtSDvuwdu/2tr1aZD3X2AURp9ZrNQz5R4aMo67HoTBuxTPU8jAHmF1Skf/vYU0Zk1feqkxKLrREEGBwTy/njnZRr66qXOdOg8IrsJQwfSu7P/X29Qs2CmG5huD5dWzxDMrzmu9H4tiPTRVZ5i9C7UUzc7ey8/kTrN7n6BKJSLCBz3eIUpjHKjtJDhbcz2HWlx1QwI3zmRzDfsd7HQFpp/ZUjvjzHfubEnkBhw2DFRK3xD37ZLCAaddVV+TTWkZyGYZa2QSs0ATh5bgsaSOhDtnq5VhIzSGDPx9V4gmI8hxRfSsAYAoBO0SJtpjDlp6VBaikKV2amVRQjuLQvd8D/PVB/8="
+    - secure: "TOG/oYZnuadPmIEt8aFele8MjktN4rOgL8Wgh9kj/LtwJs6Bh2rt9tcWgzBFbeZ/Heuxzm1bqNFoQ8wRriCgH1/tNCkC5oqSmQJtZvwYaa8k/UoarVtBYM6C9y831mf53+9nKh3yFUAIFF/jteEexnABqWSzImjaRNj2OFak9QAfFAbZ6ObVVQDmZdzISJcrmq3DeE0GAC5/JQWS56riqhdFhpgr4o/HZUICJgzNEeCZY7SI8F8XddHDB9PJ0/hGBhERvPIvGbzvzhpwWy3prrOlJAm7/3YbCwWPz46gu66UzEjgkpmXBMyf77w6XjRRAodr2KDyrIcegRs7pvnR8hkBpViy9Z/VJt+9K83oaf5m2JdnATlvysnTMqoYuG1oqpzTYjifMGLAAZrycIudnKoEqdsalHrhnhoz4CygcsCwxBJ+uO/EFA10RgNQctwQn/zJsG1ZfueECFOgRQ8EiB2yZdt519RvYWUS73qfQMVOavD90lFURpHm/JVJ1iwbbsrF6zmiql03S32LfWSYbPvrWl1GqP/l3P2EVadvG67slGwhKh7WJD/fUV0LugYa52WY8c5K0hAz9wV5teYDWS51ApmLMMk0DpaFbw6T7RoByuywF7i8vgORbKx+sn1e7PivpVhjKXbcOSv5yI1ZVPoRh7O11IkRkcVLkTVrNvU="
 
 
 before_install:
@@ -42,17 +42,16 @@ before_script:
   - $ACE_ROOT/bin/mwc.pl -type gnuace ACE.mwc
   - make ACE > /dev/null 2>&1
   - ls $ACE_ROOT/lib/  
-  
 addons:
   coverity_scan:
     project:
-      name: "freeeyes/TestTarvisACE"
-      description: "TestTarvisACE"
-      notification_email: "freeeyes@163.com"
+      name: "liuchao412/TestTarvisACE"
+      description: "Build submitted via Travis CI"
+    notification_email: liuchao412@foxmail.com
     build_command_prepend: "cd $TRAVIS_BUILD_DIR;$ACE_ROOT/bin/mwc.pl -type gnuace"
     build_command:   "make -j 4"
-    branch_pattern: "master"
-  
+    branch_pattern: master
+
 script:
   - cd $TRAVIS_BUILD_DIR
   - $ACE_ROOT/bin/mwc.pl -type gnuace
